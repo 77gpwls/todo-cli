@@ -20,6 +20,14 @@ def format_task(index, task):
     return f"{index + 1}. [{status}] {task.name}  ({task.created_at})"
 
 
+def delete_task(tasks: list[Task], index: int) -> list[Task]:
+    """0-based index에 해당하는 Task를 리스트에서 삭제하고 반환한다."""
+    if index < 0 or index >= len(tasks):
+        raise IndexError(f"index {index}는 유효한 범위(0~{len(tasks) - 1})가 아닙니다.")
+    tasks.pop(index)
+    return tasks
+
+
 def save_tasks(tasks: list[Task], filename: str = 'tasks.json') -> None:
     """할일 목록을 JSON 파일로 저장한다."""
     with open(filename, 'w', encoding='utf-8') as f:
